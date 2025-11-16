@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savaliya Abhishek - Academic Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a192f;
+            --secondary-bg: #112240;
+            --accent-color: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+            --hover-bg: #233554;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .hero-details {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-details strong {
+            color: var(--accent-color);
+        }
+
+        .cta-text {
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 1rem auto;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .toc-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .toc-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+        }
+
+        .toc-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .toc-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .philosophy-section {
+            background: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .value-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .resume-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .resume-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .resume-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .resume-card ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .resume-card li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .resume-card li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .project-card {
+            background: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .meta-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin: 1rem 0;
+            line-height: 1.8;
+        }
+
+        .project-card strong {
+            color: var(--text-primary);
+        }
+
+        .highlight-box {
+            background: rgba(100, 255, 218, 0.05);
+            border-left: 3px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .swot-card {
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid;
+        }
+
+        .swot-card.strengths {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: #4caf50;
+        }
+
+        .swot-card.weaknesses {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #f44336;
+        }
+
+        .swot-card.opportunities {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: #2196f3;
+        }
+
+        .swot-card.threats {
+            background: rgba(255, 152, 0, 0.1);
+            border-color: #ff9800;
+        }
+
+        .swot-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .swot-card.strengths h3 {
+            color: #4caf50;
+        }
+
+        .swot-card.weaknesses h3 {
+            color: #f44336;
+        }
+
+        .swot-card.opportunities h3 {
+            color: #2196f3;
+        }
+
+        .swot-card.threats h3 {
+            color: #ff9800;
+        }
+
+        .testimonial {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .testimonial p {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        .testimonial-author {
+            color: var(--accent-color);
+            font-weight: 600;
+            padding-left: 2rem;
+        }
+
+        .testimonial-role {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-left: 2rem;
+        }
+
+        footer {
+            background: var(--secondary-bg);
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+        .prof
+        {
+            height:200px;
+            width:200px;
+            border-radius: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#toc">Contents</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#ethics">Ethics</a></li>
+            <li><a href="#future">Future</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="./abhi.jpg" alt="Profile photo" class="prof">
+            <h1>Savaliya Abhishek</h1>
+            <p class="hero-tagline">"Bridging Innovation and Excellence Through Technology"</p>
+            <div class="hero-details">
+                <p><strong>Pandit Deendayal Energy University</strong></p>
+                <p>B.Tech CSE — Batch: 2023 - 2027</p>
+                <p><strong>CGPA: 9.1</strong></p>
+            </div>
+            <p class="cta-text">Navigate through my academic journey and professional achievements</p>
+        </div>
+    </section>
+
+    <section id="toc">
+        <h2>Table of Contents</h2>
+        <div class="toc-grid">
+            <div class="toc-card" onclick="location.href='#philosophy'">
+                <h3>Introduction & Philosophy</h3>
+                <p>My core values and intellectual framework</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#resume'">
+                <h3>Resume/CV</h3>
+                <p>Education, experience, and qualifications</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#projects'">
+                <h3>Projects & Research</h3>
+                <p>Interdisciplinary work and innovations</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#skills'">
+                <h3>Advanced Skills</h3>
+                <p>Technical and soft skill proficiencies</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#leadership'">
+                <h3>Leadership</h3>
+                <p>Collaborative and team achievements</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#ethics'">
+                <h3>Global Awareness</h3>
+                <p>Ethical considerations and impact</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#future'">
+                <h3>Future Aspirations</h3>
+                <p>Career goals and development plans</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#conclusion'">
+                <h3>Conclusion</h3>
+                <p>SWOT analysis and reflections</p>
+            </div>
+            <div class="toc-card" onclick="location.href='#testimonials'">
+                <h3>Testimonials</h3>
+                <p>Recommendations from mentors</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy">
+        <h2>The principles that guide my academic and personal growth</h2>
+
+        <div class="philosophy-section">
+            <p>
+                My academic journey has been shaped by an unwavering curiosity about how technology can transform lives
+                and solve real-world challenges. From my early days of writing simple code to developing complex
+                interdisciplinary projects, I've embraced every opportunity to expand my knowledge and push boundaries.
+            </p>
+            <p>
+                I believe that true learning transcends textbooks and classrooms—it happens when we actively engage with
+                problems, collaborate with diverse minds, and remain open to failure as a teacher. My approach combines
+                rigorous technical training with a deep appreciation for ethical implications, ensuring that innovation
+                serves humanity's best interests.
+            </p>
+            <p>
+                With a CGPA of 7.1, I've demonstrated consistent academic progress and developed a learning philosophy
+                centered on continuous improvement, interdisciplinary thinking, and purposeful application of knowledge.
+                I view education as a lifelong journey where each project, collaboration, and challenge contributes to
+                becoming a more versatile and impactful professional.
+            </p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <h4>🔍 Curiosity-Driven</h4>
+                <p>Always questioning, learning, exploring</p>
+            </div>
+            <div class="value-card">
+                <h4>🛡️ Ethical Technology</h4>
+                <p>Technology with responsibility</p>
+            </div>
+            <div class="value-card">
+                <h4>🤝 Collaboration</h4>
+                <p>Stronger together</p>
+            </div>
+            <div class="value-card">
+                <h4>⭐ Excellence</h4>
+                <p>Commitment to quality</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume">
+        <h2>Comprehensive overview of my education, experience, and competencies</h2>
+
+        <div class="resume-grid">
+            <div class="resume-card">
+                <h3>🎓 Education</h3>
+                <p><strong>Pandit Deendayal Energy University</strong></p>
+                <p>B.Tech - Computer Science & Engineering</p>
+                <p>2023 - 2027</p>
+                <p><strong>CGPA: 9.1/10.0</strong></p>
+                <p style="margin-top: 1rem;"><strong>Relevant Coursework:</strong></p>
+                <ul>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Database Management Systems</li>
+                    <li>Software Engineering</li>
+                    <li>Web Development</li>
+                    <li>Computer Networks</li>
+                    <li>Operating Systems</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Higher Secondary Education</strong></p>
+                <p>Percentage: 95% | Science Stream</p>
+            </div>
+
+            <div class="resume-card">
+                <h3>💼 Experience</h3>
+                <p><strong>Software Development Intern</strong></p>
+                <p>Tech Solutions Pvt. Ltd. | Summer 2024</p>
+                <ul>
+                    <li>Developed web applications using React.js</li>
+                    <li>Collaborated on full-stack projects</li>
+                    <li>Implemented RESTful APIs</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Research Assistant</strong></p>
+                <p>PDEU CS Department | 2024</p>
+                <ul>
+                    <li>Machine learning research projects</li>
+                    <li>Data analysis and visualization</li>
+                    <li>Literature review on AI technologies</li>
+                </ul>
+            </div>
+
+            <div class="resume-card">
+                <h3>🏆 Achievements</h3>
+                <ul>
+                    <li>Winner - PDEU Technical Hackathon 2024</li>
+                    <li>Academic Excellence Award</li>
+                    <li>2nd Place - State Coding Competition</li>
+                    <li>Best Project Award - DBMS Course</li>
+                    <li>Merit Scholarship Recipient</li>
+                </ul>
+            </div>
+
+            <div class="resume-card">
+                <h3>📜 Certifications</h3>
+                <ul>
+                    <li>Python Programming - Coursera</li>
+                    <li>Web Development Bootcamp - Udemy</li>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Machine Learning - NPTEL</li>
+                    <li>Cloud Computing Fundamentals</li>
+                </ul>
+            </div>
+
+            <div class="resume-card">
+                <h3>🎯 Interests</h3>
+                <ul>
+                    <li>Full-Stack Web Development</li>
+                    <li>Artificial Intelligence & ML</li>
+                    <li>Data Science & Analytics</li>
+                    <li>Cloud Computing</li>
+                    <li>IoT & Smart Systems</li>
+                    <li>Cybersecurity</li>
+                </ul>
+            </div>
+
+            <div class="resume-card">
+                <h3>🎭 Activities</h3>
+                <ul>
+                    <li>PDEU Coding Club - Core Member</li>
+                    <li>NSS Volunteer</li>
+                    <li>Smart India Hackathon Participant</li>
+                    <li>IEEE Student Chapter Member</li>
+                    <li>Sports: Cricket, Chess</li>
+                    <li>Hobbies: Photography, Tech Blogging</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Showcasing innovation through cross-disciplinary problem-solving</h2>
+
+        <div class="project-card">
+            <h3>AI-Powered Energy Management System</h3>
+            <div class="project-meta">
+                <span class="meta-tag">Machine Learning</span>
+                <span class="meta-tag">Python</span>
+                <span class="meta-tag">IoT</span>
+                <span class="meta-tag">React.js</span>
+            </div>
+            <p><strong>Overview:</strong> Developed an intelligent energy management system that uses machine learning
+                to optimize power consumption in smart buildings, reducing energy waste by up to 35%.</p>
+
+            <p><strong>Methodology:</strong> Utilized LSTM neural networks for time-series forecasting, implemented
+                RESTful APIs for sensor integration, and designed responsive web interface using React.</p>
+
+            <div class="highlight-box">
+                <p><strong>Challenge:</strong> Initial models showed poor accuracy due to irregular sensor data
+                    patterns.</p>
+                <p><strong>Solution:</strong> Implemented data preprocessing pipeline with outlier detection and missing
+                    value imputation, improving model accuracy from 68% to 91%.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Healthcare Analytics Platform</h3>
+            <div class="project-meta">
+                <span class="meta-tag">Data Science</span>
+                <span class="meta-tag">Python</span>
+                <span class="meta-tag">Machine Learning</span>
+                <span class="meta-tag">D3.js</span>
+            </div>
+            <p><strong>Overview:</strong> Created a comprehensive healthcare data analysis platform that helps medical
+                professionals identify disease patterns and predict patient outcomes using advanced analytics and
+                visualization techniques.</p>
+
+            <p><strong>Methodology:</strong> Applied ensemble learning techniques (Random Forest, XGBoost) for disease
+                prediction, used D3.js for interactive data visualization, and implemented secure authentication for
+                patient data privacy.</p>
+
+            <div class="highlight-box">
+                <p><strong>Challenge:</strong> Handling imbalanced dataset with rare diseases underrepresented.</p>
+                <p><strong>Solution:</strong> Implemented SMOTE (Synthetic Minority Over-sampling Technique) and
+                    cost-sensitive learning to improve rare disease detection rates by 45%.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Blockchain-Based Voting System</h3>
+            <div class="project-meta">
+                <span class="meta-tag">Blockchain</span>
+                <span class="meta-tag">Solidity</span>
+                <span class="meta-tag">Web3</span>
+                <span class="meta-tag">Ethereum</span>
+            </div>
+            <p><strong>Overview:</strong> Designed and implemented a secure, transparent, and tamper-proof voting system
+                using blockchain technology to address election integrity concerns and increase voter confidence.</p>
+
+            <p><strong>Methodology:</strong> Developed smart contracts using Solidity on Ethereum blockchain,
+                implemented cryptographic hashing for vote security, and created web3-enabled frontend for seamless user
+                interaction.</p>
+
+            <div class="highlight-box">
+                <p><strong>Challenge:</strong> High gas fees made transactions expensive for users.</p>
+                <p><strong>Solution:</strong> Migrated to Polygon (Layer 2 solution) reducing transaction costs by 95%
+                    while maintaining security. Also implemented batch processing for multiple votes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Deep proficiencies across technical, creative, and interpersonal domains</h2>
+
+        <div class="project-card">
+            <h3>💻 Full-Stack Web Development</h3>
+            <p>Mastered modern web development stack including React.js, Node.js, and Express. Built 15+
+                production-ready applications with responsive design and optimal performance.</p>
+            <div class="skills-grid">
+                <span class="skill-tag">React.js</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Express</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">MongoDB</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>🗄️ Database Management</h3>
+            <p>Proficient in both SQL (MySQL, PostgreSQL) and NoSQL (MongoDB) databases. Designed efficient schemas and
+                optimized queries for applications handling millions of records.</p>
+            <div class="skills-grid">
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Query Optimization</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>🤖 Machine Learning & AI</h3>
+            <p>Implemented various neural network architectures using TensorFlow and PyTorch. Specialized in time-series
+                forecasting, image classification, and NLP applications.</p>
+            <div class="skills-grid">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Scikit-learn</span>
+                <span class="skill-tag">Pandas</span>
+                <span class="skill-tag">NumPy</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>📊 Data Science & Analytics</h3>
+            <p>Expert in data preprocessing, feature engineering, and statistical analysis. Created insightful
+                visualizations with Matplotlib and Seaborn.</p>
+            <div class="skills-grid">
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Statistics</span>
+                <span class="skill-tag">Matplotlib</span>
+                <span class="skill-tag">Seaborn</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>🎤 Communication & Presentation</h3>
+            <p>Delivered 20+ technical presentations at conferences, workshops, and seminars. Skilled at explaining
+                complex concepts to both technical and non-technical audiences.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>👥 Leadership & Team Management</h3>
+            <p>Led multiple cross-functional teams in hackathons and projects. Experienced in agile methodologies,
+                conflict resolution, and fostering inclusive team environments.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>🎨 Design Thinking</h3>
+            <p>Proficient in Figma for creating user-centered designs. Apply design thinking methodology to solve
+                complex user experience challenges with empathy-driven solutions.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>💡 Problem-Solving & Innovation</h3>
+            <p>Consistently approach challenges with creative solutions. Won 5 hackathons through innovative thinking
+                and rapid prototyping of unconventional ideas.</p>
+        </div>
+    </section>
+
+    <section id="leadership">
+        <h2>Building teams, driving results, and fostering inclusive environments</h2>
+
+        <div class="project-card">
+            <h3>PDEU Coding Club - Core Team Member | 2023 - 2024</h3>
+            <div class="highlight-box">
+                <p><strong>Challenge:</strong> Team members had conflicting ideas for annual hackathon format.
+                    Facilitated open discussion sessions where each member presented their vision. Implemented
+                    democratic voting system and merged best ideas from different proposals.</p>
+                <p><strong>Result:</strong> Most successful hackathon with 200+ participants and positive feedback from
+                    95% attendees.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Hackathon Team Lead - Multiple Competitions | 2023 - 2024</h3>
+            <div class="highlight-box">
+                <p><strong>Challenge:</strong> During Smart India Hackathon 2024, team faced major setback when primary
+                    solution approach failed 12 hours before deadline. Quickly called emergency meeting, fostered
+                    psychological safety for honest feedback, brainstormed alternative approaches, and redistributed
+                    workload.</p>
+                <p><strong>Result:</strong> Despite pressure, maintained team morale through positive reinforcement and
+                    celebrated small wins. Successfully delivered innovative solution and secured finalist position.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Peer Mentor - PDEU Academic Support | 2023 - Present</h3>
+            <div class="highlight-box">
+                <p><strong>Challenge:</strong> Study group members had vastly different learning paces, causing
+                    frustration. Implemented tiered learning approach with advanced students helping beginners (peer
+                    teaching), which reinforced concepts for all.</p>
+                <p><strong>Result:</strong> Created inclusive environment where questions were encouraged. This
+                    collaborative structure improved understanding and built supportive community.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ethics">
+        <h2>Understanding technology's impact on society and ethical responsibility</h2>
+
+        <div class="philosophy-section">
+            <h3>Case Study: Algorithmic Bias in Healthcare Analytics</h3>
+            <p>While developing the Healthcare Analytics Platform, I discovered that our disease prediction model showed
+                significantly lower accuracy (15-20% less) for underrepresented minority populations. This bias stemmed
+                from training data that predominantly featured majority demographic groups.</p>
+
+            <p><strong>Ethical Analysis:</strong> This situation presented serious ethical concerns about fairness,
+                access to quality healthcare, and the potential for AI systems to perpetuate existing healthcare
+                disparities. I realized that technical accuracy alone is insufficient—we must ensure equitable
+                performance across all population segments.</p>
+
+            <p><strong>Personal Reflection:</strong> This experience fundamentally shaped my understanding of
+                technology's responsibility. As developers, we don't just write code—we shape how society functions. I
+                learned that ethical considerations must be integrated from the beginning of any project, not added as
+                an afterthought.</p>
+
+            <p><strong>My Commitment:</strong> I pledge to always prioritize ethical considerations in my work, advocate
+                for inclusive design practices, and speak up when I identify potential harm in technological solutions.
+            </p>
+        </div>
+    </section>
+</body>
+
+</html>
